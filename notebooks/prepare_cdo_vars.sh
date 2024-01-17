@@ -42,10 +42,17 @@ cdo mergetime $path_open2/n42openc_*_1M_icemod_Arc.nc $path_open2/n42openc_01-10
 cdo mergetime $path_closed2/n42tm21_*_1M_icemod_Ant.nc $path_closed2/n42tm21_01-100_1M_icemod_Ant.nc
 cdo mergetime $path_closed2/n42tm21_*_1M_icemod_Arc.nc $path_closed2/n42tm21_01-100_1M_icemod_Arc.nc
 
-cdo fldsum -gtc,0.15 -selvar,siconc $path_open2/n42openc_01-100_1M_icemod_Ant.nc $path_open2/n42openc_01-100_1M_icemod_Ant_SIE.nc
-cdo fldsum -gtc,0.15 -selvar,siconc $path_open2/n42openc_01-100_1M_icemod_Arc.nc $path_open2/n42openc_01-100_1M_icemod_Arc_SIE.nc
-cdo fldsum -gtc,0.15 -selvar,siconc $path_closed2/n42tm21_01-100_1M_icemod_Ant.nc $path_closed2/n42tm21_01-100_1M_icemod_Ant_SIE.nc
-cdo fldsum -gtc,0.15 -selvar,siconc $path_closed2/n42tm21_01-100_1M_icemod_Arc.nc $path_closed2/n42tm21_01-100_1M_icemod_Arc_SIE.nc
+cdo gtc,0.15 -selvar,siconc $path_open2/n42openc_01-100_1M_icemod_Ant.nc $path_open2/n42openc_01-100_1M_icemod_Ant_SIEmask.nc
+cdo gtc,0.15 -selvar,siconc $path_open2/n42openc_01-100_1M_icemod_Arc.nc $path_open2/n42openc_01-100_1M_icemod_Arc_SIEmask.nc
+cdo gtc,0.15 -selvar,siconc $path_closed2/n42tm21_01-100_1M_icemod_Ant.nc $path_closed2/n42tm21_01-100_1M_icemod_Ant_SIEmask.nc
+cdo gtc,0.15 -selvar,siconc $path_closed2/n42tm21_01-100_1M_icemod_Arc.nc $path_closed2/n42tm21_01-100_1M_icemod_Arc_SIEmask.nc
+
+cdo fldsum -ifthen $path_closed2/n42tm21_01-100_1M_icemod_Ant_SIEmask.nc -selvar,cell_area $path_closed2/n42tm21_01-100_1M_icemod_Ant.nc $path_closed2/n42tm21_01-100_1M_icemod_Ant_SIE.nc
+cdo fldsum -ifthen $path_closed2/n42tm21_01-100_1M_icemod_Arc_SIEmask.nc -selvar,cell_area $path_closed2/n42tm21_01-100_1M_icemod_Arc.nc $path_closed2/n42tm21_01-100_1M_icemod_Arc_SIE.nc
+
+cdo fldsum -ifthen $path_open2/n42openc_01-100_1M_icemod_Ant_SIEmask.nc -selvar,cell_area $path_open2/n42openc_01-100_1M_icemod_Ant.nc $path_open2/n42openc_01-100_1M_icemod_Ant_SIE.nc
+cdo fldsum -ifthen $path_open2/n42openc_01-100_1M_icemod_Arc_SIEmask.nc -selvar,cell_area $path_open2/n42openc_01-100_1M_icemod_Arc.nc $path_open2/n42openc_01-100_1M_icemod_Arc_SIE.nc
+
 
 ### CUT OUT REGIONS
 for yy in {0..9}
@@ -96,6 +103,17 @@ done
 
 cdo mergetime $path_open2/n42openc_*_1Y_uo_vertsum.nc $path_open2/n42openc_0-100_1Y_uo_vertsum.nc
 cdo mergetime $path_closed2/n42tm21_*_1Y_uo_vertsum.nc $path_closed2/n42tm21_0-100_1Y_uo_vertsum.nc
+
+### ICE SHELF MELT
+for yy in {0..9}
+do
+
+yy1=$(expr $yy + 1)
+cdo -selvar,iceshelf_cav,iceshelf $path_open/n42openc_00"$yy"10101_00"$yy1"01231_1Y_grid_T.nc $path_open2/n42openc_00"$yy"10101_00"$yy1"01231_1Y_grid_isfvars.nc
+
+done
+
+cdo mergetime $path_open2/n42openc_*_1Y_grid_isfvars.nc $path_open2/n42openc_0-100_1Y_grid_isfvars.nc
 
 ### WEDDELL AND ROSS GYRE
 
