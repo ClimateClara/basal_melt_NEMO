@@ -118,4 +118,10 @@ cdo mergetime $path_open2/n42openc_*_1Y_grid_isfvars.nc $path_open2/n42openc_0-1
 ### WEDDELL AND ROSS GYRE
 
 #Weddell
-cdo -31.250 37.500 -66.500 -60.400
+cdo vertsum -sellonlatbox,-31.25,37.50,-66.50,-60.40 -selvar,uocetr_eff 
+
+
+
+
+
+-168.500 -135.750 -72.650 -61.600
