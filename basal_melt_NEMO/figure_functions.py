@@ -14,7 +14,7 @@ from cartopy.util import add_cyclic_point
 
 def maps_compare3(lon,lat,ref,modif,name,cmap,region,legend,lat_lim=-50):
     
-    f = plt.figure(figsize=(8.25*3,8.25))
+    f = plt.figure(figsize=(8.25*1.5,8.25/1.5))
     #f = plt.figure()
     #f.suptitle(str(time_in.values)[0:16],fontsize=22)
 
