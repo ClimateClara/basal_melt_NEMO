@@ -50,6 +50,7 @@ def bottom_prop_reg(var,lon,lat,reg,bottom_cell):
     mask_regions['EROSS'] = (lon >= -176.790) & (lon <= -157.820) & (lat >= -78.870) & (lat <= -77.520)
     mask_regions['WWED'] = (lon >= -65.130) & (lon <= -53.020) & (lat >= -75.950) & (lat <= -72.340)
     mask_regions['EWED'] = (lon >= -45.647) & (lon <= -32.253) & (lat >= -78.632) & (lat <= -76.899)
+    mask_regions['PRYDZ'] = (lon >= 65.) & (lon <= 80.) & (lat >= -75.) & (lat <= -65.)
     
     return var.isel(deptht=bottom_cell).where(mask_regions[reg], drop=True)
 
