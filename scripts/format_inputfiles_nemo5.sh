@@ -1,5 +1,5 @@
 # for the folder BLKDIR
-path1=/ccc/work/cont003/igcmg/igcmg/IGCM/OCE/NEMO/FORCINGS/COREIIcorr
+path1=/ccc/work/cont003/igcmg/igcmg/IGCM/OCE/NEMO/FORCINGS/MRI-JRA55-do-1-4-0
 
 ORCA_choice=eORCA1.4.2
 
